@@ -19,7 +19,7 @@ public class Volume {
         return this.id;
     }
     @ManyToOne
-    @Column(name = "book_id")
+    @JoinColumn(name = "book_id")
     public Book getBook() {
         return this.book;
     }
