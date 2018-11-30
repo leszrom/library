@@ -1,25 +1,43 @@
 package com.crud.library.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity(name = "volumes")
 public class Volume {
+    private long id;
+    private Book book;
+    private boolean isRented;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    public long getId() {
+        return this.id;
+    }
 
     @Column(name = "book_id")
-    private Book book;
+    public Book getBook() {
+        return this.book;
+    }
 
     @Column(name = "status")
-    private boolean isRented;
+    public boolean isRented() {
+        return this.isRented;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public void setRented(boolean isRented) {
+        this.isRented = isRented;
+    }
 }
