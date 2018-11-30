@@ -22,6 +22,7 @@ public class Loan {
         return this.id;
     }
 
+    @ManyToOne
     @Column(name = "user_id")
     public User getUser() {
         return this.user;

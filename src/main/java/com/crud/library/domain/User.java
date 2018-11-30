@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +17,7 @@ public class User {
     private String firstname;
     private String lastname;
     private LocalDate created;
+    private List<Loan> loans = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +39,15 @@ public class User {
     public LocalDate getCreated() {
         return created;
     }
+    @OneToMany(
+            targetEntity = Loan.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public List<Loan> getLoans() {
+        return loans;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -49,6 +61,9 @@ public class User {
         this.lastname = lastname;
     }
 
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
     public void setCreated(LocalDate created) {
         this.created = created;
     }
