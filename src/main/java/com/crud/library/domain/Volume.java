@@ -18,7 +18,7 @@ public class Volume {
     public long getId() {
         return this.id;
     }
-
+    @ManyToOne
     @Column(name = "book_id")
     public Book getBook() {
         return this.book;

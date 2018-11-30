@@ -5,15 +5,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="books")
+@Entity(name = "books")
 public class Book {
     private long id;
     private String title;
     private String author;
     private LocalDate published;
+    private List<Volume> volumes;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,9 +33,19 @@ public class Book {
         return this.author;
     }
 
-    @Column(name="publication_date")
+    @Column(name = "publication_date")
     public LocalDate getPublished() {
         return this.published;
+    }
+
+    @OneToMany(
+            targetEntity = Volume.class,
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public List<Volume> getVolumes() {
+        return volumes;
     }
 
     public void setId(long id) {
@@ -50,5 +62,9 @@ public class Book {
 
     public void setPublished(LocalDate published) {
         this.published = published;
+    }
+
+    public void setVolumes(List<Volume> volumes) {
+        this.volumes = volumes;
     }
 }
