@@ -21,7 +21,8 @@ public class Loan {
     @Column(name = "user_id")
     private User user;
 
-    @Column(name = "volume_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "volume_id")
     private Volume volume;
 
     @Column(name = "pick_up_date")
