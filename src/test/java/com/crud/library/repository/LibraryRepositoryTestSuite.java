@@ -84,7 +84,10 @@ public class LibraryRepositoryTestSuite {
         Assert.assertEquals(blueFlowersVolumes, blueFlowersVolumesRead);
         Assert.assertEquals(runwayVolumes, runwayVolumesRead);
 
-        userRepository.deleteAll();
-        bookRepository.deleteAll();
+        //CleanUp
+        userRepository.delete(johnSmith);
+        userRepository.delete(aliceBow);
+        bookRepository.delete(blueFlowers);
+        bookRepository.delete(runway);
     }
 }
