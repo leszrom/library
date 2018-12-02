@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -15,7 +16,13 @@ public class Book {
     private String title;
     private String author;
     private LocalDate published;
-    private List<Volume> volumes;
+    private List<Volume> volumes = new ArrayList<>();
+
+    public Book(String title, String author, LocalDate published) {
+        this.title = title;
+        this.author = author;
+        this.published = published;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -13,12 +13,17 @@ public class Volume {
     private Book book;
     private boolean isRented;
 
+    public Volume(Book book, boolean isRented) {
+        this.book = book;
+        this.isRented = isRented;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return this.id;
     }
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "book_id")
     public Book getBook() {
         return this.book;

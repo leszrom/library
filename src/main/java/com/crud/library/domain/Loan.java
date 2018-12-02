@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +14,14 @@ public class Loan {
     private long id;
     private User user;
     private Volume volume;
-    private LocalDate pickUp;
-    private LocalDate dropOff;
+    private Date pickUp;
+    private Date dropOff;
+
+    public Loan(User user, Volume volume) {
+        this.user = user;
+        this.volume = volume;
+        this.pickUp = new Date();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,25 +29,25 @@ public class Loan {
         return this.id;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return this.user;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "volume_id")
     public Volume getVolume() {
         return this.volume;
     }
 
     @Column(name = "pick_up_date")
-    public LocalDate getPickUp() {
+    public Date getPickUp() {
         return this.pickUp;
     }
 
     @Column(name = "drop_off_date")
-    public LocalDate getDropOff() {
+    public Date getDropOff() {
         return this.dropOff;
     }
 
@@ -56,11 +63,11 @@ public class Loan {
         this.volume = volume;
     }
 
-    public void setPickUp(LocalDate pickUp) {
+    public void setPickUp(Date pickUp) {
         this.pickUp = pickUp;
     }
 
-    public void setDropOff(LocalDate dropOff) {
+    public void setDropOff(Date dropOff) {
         this.dropOff = dropOff;
     }
 }
