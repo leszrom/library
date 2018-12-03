@@ -11,11 +11,11 @@ import javax.persistence.*;
 public class Volume {
     private long id;
     private Book book;
-    private boolean isRented;
+    private boolean rented;
 
-    public Volume(Book book, boolean isRented) {
+    public Volume(Book book, boolean rented) {
         this.book = book;
-        this.isRented = isRented;
+        this.rented = rented;
     }
 
     @Id
@@ -31,7 +31,7 @@ public class Volume {
 
     @Column(name = "status")
     public boolean isRented() {
-        return this.isRented;
+        return this.rented;
     }
 
     public void setId(long id) {
@@ -42,7 +42,7 @@ public class Volume {
         this.book = book;
     }
 
-    public void setRented(boolean isRented) {
-        this.isRented = isRented;
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 }
