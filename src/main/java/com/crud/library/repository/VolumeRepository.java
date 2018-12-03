@@ -10,5 +10,7 @@ import java.util.List;
 @Transactional
 @Repository
 public interface VolumeRepository extends CrudRepository<Volume, Long> {
-    List<Volume> findAllByBookId(long id);
+    List<Volume> findAllByBookId(Long id);
+
+    List<Volume> findAllByBookIdAndRentedIsFalse(Long id);
 }
