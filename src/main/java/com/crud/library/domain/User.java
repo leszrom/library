@@ -25,6 +25,13 @@ public class User {
         this.created = new Date();
     }
 
+    public User(long id, String firstname, String lastname, Date created) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.created = created;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
