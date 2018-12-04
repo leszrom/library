@@ -5,6 +5,7 @@ import com.crud.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -16,7 +17,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(final User user) {
+    public User saveUser(final User user) {
+        user.setCreated(new Date());
         return userRepository.save(user);
     }
 

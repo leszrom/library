@@ -22,7 +22,6 @@ public class User {
     public User(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.created = new Date();
     }
 
     public User(long id, String firstname, String lastname, Date created) {
