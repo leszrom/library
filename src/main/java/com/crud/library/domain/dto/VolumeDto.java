@@ -1,6 +1,5 @@
 package com.crud.library.domain.dto;
 
-import com.crud.library.domain.Book;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VolumeDto {
     private long id;
-    private Book book;
+    private long bookId;
     private boolean isRented;
 }

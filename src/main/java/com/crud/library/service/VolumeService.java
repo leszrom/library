@@ -15,7 +15,7 @@ public class VolumeService {
         this.volumeRepository = volumeRepository;
     }
 
-    public Volume createVolume(final Volume volume) {
+    public Volume saveVolume(final Volume volume) {
         return volumeRepository.save(volume);
     }
 
