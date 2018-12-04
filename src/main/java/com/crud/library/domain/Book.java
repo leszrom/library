@@ -24,6 +24,13 @@ public class Book {
         this.published = published;
     }
 
+    public Book(long id, String title, String author, Date published) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.published = published;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
