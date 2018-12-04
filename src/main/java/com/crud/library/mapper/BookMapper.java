@@ -11,7 +11,7 @@ public class BookMapper {
                 bookDto.getId(),
                 bookDto.getTitle(),
                 bookDto.getAuthor(),
-                bookDto.getPublished()
+                bookDto.getPublicationYear()
         );
     }
 
@@ -20,7 +20,7 @@ public class BookMapper {
                 book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
-                book.getPublished()
+                book.getPublicationYear()
         );
     }
 }
