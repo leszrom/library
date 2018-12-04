@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -15,10 +15,10 @@ public class Book {
     private long id;
     private String title;
     private String author;
-    private LocalDate published;
+    private Date published;
     private List<Volume> volumes = new ArrayList<>();
 
-    public Book(String title, String author, LocalDate published) {
+    public Book(String title, String author, Date published) {
         this.title = title;
         this.author = author;
         this.published = published;
@@ -41,7 +41,7 @@ public class Book {
     }
 
     @Column(name = "publication_date")
-    public LocalDate getPublished() {
+    public Date getPublished() {
         return this.published;
     }
 
@@ -67,7 +67,7 @@ public class Book {
         this.author = author;
     }
 
-    public void setPublished(LocalDate published) {
+    public void setPublished(Date published) {
         this.published = published;
     }
 
