@@ -16,10 +16,10 @@ public class Loan {
     private Date pickUp;
     private Date dropOff;
 
-    public Loan(User user, Volume volume) {
+    public Loan(User user, Volume volume, Date pickUp) {
         this.user = user;
         this.volume = volume;
-        this.pickUp = new Date();
+        this.pickUp = pickUp;
     }
 
     @Id
