@@ -22,7 +22,7 @@ public class LoanService {
         return loanRepository.save(loan);
     }
 
-    public Loan updateLoan(final Long id) {
+    public Loan setDropOffDateAndVolumeStatus(final Long id) {
         Loan theLoan = loanRepository.findById(id).get();
         theLoan.setDropOff(new Date());
         theLoan.getVolume().setRented(false);
