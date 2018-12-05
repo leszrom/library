@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class VolumeService {
     private final VolumeRepository volumeRepository;
@@ -25,5 +27,9 @@ public class VolumeService {
 
     public List<Volume> getAvailableVolumesByBookId(final Long id) {
         return volumeRepository.findAllByBookIdAndRentedIsFalse(id);
+    }
+
+    public Optional<Volume> getVolumeById(final Long id) {
+        return volumeRepository.findById(id);
     }
 }

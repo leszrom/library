@@ -1,8 +1,6 @@
 package com.crud.library.service;
 
 import com.crud.library.domain.Loan;
-import com.crud.library.domain.User;
-import com.crud.library.domain.Volume;
 import com.crud.library.repository.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +16,16 @@ public class LoanService {
         this.loanRepository = loanRepository;
     }
 
-    public Loan createLoan(final User user, final Volume volume) {
-        return loanRepository.save(new Loan(user, volume));
+    public Loan saveLoan(final Loan loan) {
+        loan.setPickUp(new Date());
+        loan.getVolume().setRented(true);
+        return loanRepository.save(loan);
     }
 
-    public Loan finishLoan(final Loan loan) {
-        loan.setDropOff(new Date());
-        loan.getVolume().setRented(false);
-        return loanRepository.save(loan);
+    public Loan updateLoan(final Long id) {
+        Loan theLoan = loanRepository.findById(id).get();
+        theLoan.setDropOff(new Date());
+        theLoan.getVolume().setRented(false);
+        return loanRepository.save(theLoan);
     }
 }
