@@ -28,13 +28,13 @@ public class Loan {
         return this.id;
     }
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     public User getUser() {
         return this.user;
     }
 
-    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "volume_id")
     public Volume getVolume() {
         return this.volume;
