@@ -4,16 +4,14 @@ import com.crud.library.domain.dto.UserDto;
 import com.crud.library.mapper.UserMapper;
 import com.crud.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/users")
 public class UserController {
+    private static final String USER_DOES_NOT_EXIST = "The user with the given id does not exist";
     private final UserService userService;
     private final UserMapper userMapper;
 
@@ -27,5 +25,9 @@ public class UserController {
     public Long createUser(@RequestBody UserDto userDto) {
         return userService.saveUser(userMapper.mapToUser(userDto)).getId();
     }
-
+    @RequestMapping(method = RequestMethod.GET, value = "{id}")
+    public UserDto getUser(@PathVariable Long id) throws UserNotFoundException {
+        return userMapper.mapToUserDto(userService.getUserById(id)
+                .orElseThrow(() -> new UserNotFoundException(USER_DOES_NOT_EXIST)));
+    }
 }
