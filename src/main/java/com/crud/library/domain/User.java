@@ -19,9 +19,10 @@ public class User {
     private Date created;
     private List<Loan> loans = new ArrayList<>();
 
-    public User(String firstname, String lastname) {
+    public User(String firstname, String lastname, Date created) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.created = created;
     }
 
     public User(long id, String firstname, String lastname, Date created) {
