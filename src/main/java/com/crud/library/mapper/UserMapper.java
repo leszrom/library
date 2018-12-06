@@ -4,6 +4,9 @@ import com.crud.library.domain.User;
 import com.crud.library.domain.dto.UserDto;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class UserMapper {
     public User mapToUser(UserDto userDto) {
@@ -24,4 +27,9 @@ public class UserMapper {
         );
     }
 
+    public List<UserDto> mapToUserDtoList(final List<User> userList) {
+        return userList.stream()
+                .map(this::mapToUserDto)
+                .collect(Collectors.toList());
+    }
 }
