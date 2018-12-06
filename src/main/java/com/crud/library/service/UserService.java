@@ -31,6 +31,16 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User updateUser(final User user) {
+        if (userRepository.findById(user.getId()).isPresent()) {
+            Date created = userRepository.findById(user.getId()).get().getCreated();
+            user.setCreated(created);
+        } else {
+            user.setCreated(new Date());
+        }
+        return userRepository.save(user);
+    }
+
     public void deleteUserById(final Long id) {
         userRepository.deleteById(id);
     }

@@ -38,4 +38,9 @@ public class UserController {
     public List<UserDto> getUsers() {
         return userMapper.mapToUserDtoList(userService.getAllUsers());
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "{id}", consumes = APPLICATION_JSON_VALUE)
+    public UserDto changeUserDetails(@RequestBody UserDto userDto, @PathVariable Long id) {
+        return userMapper.mapToUserDto(userService.updateUser(userMapper.mapToUser(userDto)));
+    }
 }
