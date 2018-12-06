@@ -23,8 +23,8 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
-    public Book createBook(@RequestBody BookDto bookDto) {
-        return bookService.saveBook(bookMapper.mapToBook(bookDto));
+    public Long createBook(@RequestBody BookDto bookDto) {
+        return bookService.saveBook(bookMapper.mapToBook(bookDto)).getId();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "{bookId}/volumes")
