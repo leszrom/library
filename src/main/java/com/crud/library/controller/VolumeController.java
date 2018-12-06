@@ -1,31 +1,32 @@
 package com.crud.library.controller;
 
+import com.crud.library.domain.Book;
 import com.crud.library.domain.Volume;
-import com.crud.library.domain.dto.VolumeDto;
-import com.crud.library.mapper.VolumeMapper;
+import com.crud.library.service.BookService;
 import com.crud.library.service.VolumeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RestController
-@RequestMapping("/v1/volumes")
+@RequestMapping("/v1/books")
 public class VolumeController {
+    private static final String BOOK_DOES_NOT_EXIST = "The book with the given id does not exist";
     private VolumeService volumeService;
-    private VolumeMapper volumeMapper;
+    private BookService bookService;
 
     @Autowired
-    public VolumeController(VolumeService volumeService, VolumeMapper volumeMapper) {
+    public VolumeController(VolumeService volumeService, BookService bookService) {
         this.volumeService = volumeService;
-        this.volumeMapper = volumeMapper;
+        this.bookService = bookService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
-    public Long createVolume(@RequestBody VolumeDto volumeDto) {
-        return volumeService.saveVolume(volumeMapper.mapToVolume(volumeDto)).getId();
+    @RequestMapping(method = RequestMethod.POST, value = "{bookId}/volumes")
+    public Long createVolume(@PathVariable Long bookId) throws BookNotFoundException {
+        Book theBook = bookService.getBookById(bookId)
+                .orElseThrow(() -> new BookNotFoundException(BOOK_DOES_NOT_EXIST));
+        return volumeService.saveVolume(new Volume(theBook, false)).getId();
     }
 }
