@@ -43,4 +43,9 @@ public class UserController {
     public UserDto changeUserDetails(@RequestBody UserDto userDto, @PathVariable Long id) {
         return userMapper.mapToUserDto(userService.updateUser(userMapper.mapToUser(userDto)));
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
+    }
 }
