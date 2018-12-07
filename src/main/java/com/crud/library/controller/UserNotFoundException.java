@@ -1,7 +1,7 @@
 package com.crud.library.controller;
 
-public class UserNotFoundException extends Exception {
-    public UserNotFoundException(final String message) {
-        super(message);
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException() {
+        super("The user with the given id does not exist");
     }
 }

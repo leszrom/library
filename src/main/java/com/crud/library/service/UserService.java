@@ -13,7 +13,6 @@ import java.util.List;
 
 @Service
 public class UserService {
-    private static final String USER_DOES_NOT_EXIST = "The user with the given id does not exist";
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -29,8 +28,8 @@ public class UserService {
         return userMapper.mapToUserDto(userRepository.save(user));
     }
 
-    public UserDto getUserById(final Long id) throws UserNotFoundException {
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(USER_DOES_NOT_EXIST));
+    public UserDto getUserById(final Long id) {
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return userMapper.mapToUserDto(user);
     }
 
