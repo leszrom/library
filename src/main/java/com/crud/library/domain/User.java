@@ -1,12 +1,15 @@
 package com.crud.library.domain;
 
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
@@ -14,13 +17,12 @@ public class User {
     private long id;
     private String firstname;
     private String lastname;
-    private Date created;
+    private LocalDate created;
     private List<Loan> loans = new ArrayList<>();
 
     public User(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
-        created = new Date();
     }
 
     @Id
@@ -39,8 +41,9 @@ public class User {
         return lastname;
     }
 
+    @CreatedDate
     @Column(name = "created_date")
-    public Date getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
@@ -70,7 +73,7 @@ public class User {
         this.loans = loans;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 }
