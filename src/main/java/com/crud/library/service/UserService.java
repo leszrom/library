@@ -2,8 +2,8 @@ package com.crud.library.service;
 
 import com.crud.library.controller.UserNotFoundException;
 import com.crud.library.domain.User;
-import com.crud.library.domain.dto.UserDtoRequest;
 import com.crud.library.domain.dto.UserDto;
+import com.crud.library.domain.dto.UserDtoRequest;
 import com.crud.library.mapper.UserMapper;
 import com.crud.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,6 @@ public class UserService {
 
     public UserDto updateUser(final Long id, final UserDtoRequest userDtoRequest) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        user.setId(id);
         user.setFirstname(userDtoRequest.getFirstname());
         user.setLastname(userDtoRequest.getLastname());
         return userMapper.mapToUserDto(userRepository.save(user));
