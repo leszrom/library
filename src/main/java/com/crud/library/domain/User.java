@@ -1,6 +1,5 @@
 package com.crud.library.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -19,17 +17,10 @@ public class User {
     private Date created;
     private List<Loan> loans = new ArrayList<>();
 
-    public User(String firstname, String lastname, Date created) {
+    public User(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.created = created;
-    }
-
-    public User(long id, String firstname, String lastname, Date created) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.created = created;
+        created = new Date();
     }
 
     @Id
@@ -48,7 +39,7 @@ public class User {
         return lastname;
     }
 
-    @Column(name = "creation_date")
+    @Column(name = "created_date")
     public Date getCreated() {
         return created;
     }

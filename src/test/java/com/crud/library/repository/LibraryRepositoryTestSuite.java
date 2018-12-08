@@ -28,8 +28,8 @@ public class LibraryRepositoryTestSuite {
     @Test
     public void should_persist_users_books_volumes_and_loans_in_database() {
         //Given
-        User johnSmith = new User("John", "Smith", new Date());
-        User aliceBow = new User("Alice", "Bow", new Date());
+        User johnSmith = new User("John", "Smith");
+        User aliceBow = new User("Alice", "Bow");
 
         Book blueFlowers = new Book("Blue Flower", "Michael Gill", 2014);
         Book runway = new Book("Runway", "Ben Slow", 1995);

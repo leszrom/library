@@ -2,6 +2,7 @@ package com.crud.library.mapper;
 
 import com.crud.library.domain.User;
 import com.crud.library.domain.dto.UserDto;
+import com.crud.library.domain.dto.UserDtoRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,12 +10,10 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
-    public User mapToUser(UserDto userDto) {
+    public User mapToUser(UserDtoRequest userDtoRequest) {
         return new User(
-                userDto.getId(),
-                userDto.getFirstname(),
-                userDto.getLastname(),
-                userDto.getCreated()
+                userDtoRequest.getFirstname(),
+                userDtoRequest.getLastname()
         );
     }
 

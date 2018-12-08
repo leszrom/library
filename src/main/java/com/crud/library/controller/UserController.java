@@ -1,6 +1,7 @@
 package com.crud.library.controller;
 
 import com.crud.library.domain.dto.UserDto;
+import com.crud.library.domain.dto.UserDtoRequest;
 import com.crud.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +21,12 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
-    public Long createUser(@RequestBody UserDto userDto) {
-        return userService.saveUser(userDto).getId();
+    public Long createUser(@RequestBody UserDtoRequest userDtoRequest) {
+        return userService.saveUser(userDtoRequest);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
-    public UserDto getUser(@PathVariable Long id) throws UserNotFoundException {
+    public UserDto getUser(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
@@ -35,8 +36,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "{id}", consumes = APPLICATION_JSON_VALUE)
-    public UserDto changeUserDetails(@PathVariable Long id, @RequestBody UserDto userDto) {
-        return userService.updateUser(id, userDto);
+    public UserDto changeUserDetails(@PathVariable Long id, @RequestBody UserDtoRequest userDtoRequest) {
+        return userService.updateUser(id, userDtoRequest);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
