@@ -2,26 +2,26 @@ package com.crud.library.mapper;
 
 import com.crud.library.domain.Loan;
 import com.crud.library.domain.dto.LoanDto;
-import com.crud.library.service.UserService;
+import com.crud.library.repository.UserRepository;
 import com.crud.library.service.VolumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoanMapper {
-    private UserService userService;
     private VolumeService volumeService;
+    private UserRepository userRepository;
 
     @Autowired
-    public LoanMapper(UserService userService, VolumeService volumeService) {
-        this.userService = userService;
+    public LoanMapper(VolumeService volumeService, UserRepository userRepository) {
         this.volumeService = volumeService;
+        this.userRepository = userRepository;
     }
 
     public Loan mapToLoan(LoanDto loanDto) {
         return new Loan(
                 loanDto.getId(),
-                userService.getUserById(loanDto.getUserId()).get(),
+                userRepository.findOne(loanDto.getUserId()),
                 volumeService.getVolumeById(loanDto.getVolumeId()).get(),
                 loanDto.getPickUp(),
                 loanDto.getDropOff()
