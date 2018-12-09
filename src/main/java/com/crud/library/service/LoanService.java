@@ -1,9 +1,12 @@
 package com.crud.library.service;
 
 import com.crud.library.domain.Loan;
+import com.crud.library.domain.User;
+import com.crud.library.domain.Volume;
 import com.crud.library.domain.dto.LoanDto;
-import com.crud.library.mapper.LoanMapper;
 import com.crud.library.repository.LoanRepository;
+import com.crud.library.repository.UserRepository;
+import com.crud.library.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +15,21 @@ import java.util.Date;
 @Service
 public class LoanService {
     private final LoanRepository loanRepository;
-    private final LoanMapper loanMapper;
+    private final UserRepository userRepository;
+    private final VolumeRepository volumeRepository;
 
     @Autowired
-    public LoanService(LoanRepository loanRepository, LoanMapper loanMapper) {
+    public LoanService(LoanRepository loanRepository, UserRepository userRepository, VolumeRepository volumeRepository) {
         this.loanRepository = loanRepository;
-        this.loanMapper = loanMapper;
+        this.userRepository = userRepository;
+        this.volumeRepository = volumeRepository;
     }
 
     public Long saveLoan(final LoanDto loanDto) {
-        Loan loan = loanMapper.mapToLoan(loanDto);
-        loan.setPickUp(new Date());
-        loan.getVolume().setRented(true);
+        User user = userRepository.findOne(loanDto.getUserId());
+        Volume volume = volumeRepository.findOne(loanDto.getId());
+        volume.setRented(true);
+        Loan loan = new Loan(user, volume, new Date());
         return loanRepository.save(loan).getId();
     }
 
