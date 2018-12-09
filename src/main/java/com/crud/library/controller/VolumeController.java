@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/books")
 public class VolumeController {
-    private static final String BOOK_DOES_NOT_EXIST = "The book with the given id does not exist";
     private VolumeService volumeService;
     private BookService bookService;
 
@@ -24,9 +23,9 @@ public class VolumeController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "{bookId}/volumes")
-    public Long createVolume(@PathVariable Long bookId) throws BookNotFoundException {
+    public Long createVolume(@PathVariable Long bookId) {
         Book theBook = bookService.getBookById(bookId)
-                .orElseThrow(() -> new BookNotFoundException(BOOK_DOES_NOT_EXIST));
+                .orElseThrow(BookNotFoundException::new);
         return volumeService.saveVolume(new Volume(theBook, false)).getId();
     }
 }
