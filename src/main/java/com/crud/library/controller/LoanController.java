@@ -2,6 +2,7 @@ package com.crud.library.controller;
 
 import com.crud.library.domain.Loan;
 import com.crud.library.domain.dto.LoanDto;
+import com.crud.library.domain.dto.LoanDtoRequest;
 import com.crud.library.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,12 @@ public class LoanController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
-    public Long createLoan(@RequestBody LoanDto loanDto) {
-        return loanService.saveLoan(loanDto);
+    public Long createLoan(@RequestBody LoanDtoRequest loanDtoRequest) {
+        return loanService.saveLoan(loanDtoRequest);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "{loanId}")
-    public Loan finishLoan(@PathVariable Long loanId) {
+    public LoanDto finishLoan(@PathVariable Long loanId) {
         return loanService.setDropOffDateAndVolumeStatus(loanId);
     }
 }
