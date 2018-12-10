@@ -2,7 +2,6 @@ package com.crud.library.domain;
 
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -40,7 +39,6 @@ public class Loan {
     public Volume getVolume() {
         return this.volume;
     }
-
 
     @CreatedDate
     @Column(name = "pick_up_date")
