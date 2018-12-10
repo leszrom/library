@@ -37,13 +37,21 @@ public class BookService {
         return bookMapper.mapToBookDtoList(bookRepository.findAll());
     }
 
-    public void addVolume(final Long bookId) {
-        Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
-        book.getVolumes().add(new Volume(book, false));
-        bookRepository.save(book);
+    public BookDto updateBook(final Long id, final BookDtoRequest bookDtoRequest) {
+        Book book = bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
+        book.setTitle(bookDtoRequest.getTitle());
+        book.setAuthor(bookDtoRequest.getAuthor());
+        book.setPublicationYear(bookDtoRequest.getPublicationYear());
+        return bookMapper.mapToBookDto(bookRepository.save(book));
     }
 
     public void deleteBookById(final Long id) {
         bookRepository.deleteById(id);
+    }
+
+    public void addVolume(final Long bookId) {
+        Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
+        book.getVolumes().add(new Volume(book, false));
+        bookRepository.save(book);
     }
 }

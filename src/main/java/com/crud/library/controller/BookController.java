@@ -35,6 +35,11 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "{id}")
+    public BookDto changeBookDetails(@PathVariable Long id, @RequestBody BookDtoRequest bookDtoRequest) {
+        return bookService.updateBook(id, bookDtoRequest);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBookById(id);
