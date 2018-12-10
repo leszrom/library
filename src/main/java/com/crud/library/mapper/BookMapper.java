@@ -2,16 +2,16 @@ package com.crud.library.mapper;
 
 import com.crud.library.domain.Book;
 import com.crud.library.domain.dto.BookDto;
+import com.crud.library.domain.dto.BookDtoRequest;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BookMapper {
-    public Book mapToBook(BookDto bookDto) {
+    public Book mapToBook(BookDtoRequest bookDtoRequest) {
         return new Book(
-                bookDto.getId(),
-                bookDto.getTitle(),
-                bookDto.getAuthor(),
-                bookDto.getPublicationYear()
+                bookDtoRequest.getTitle(),
+                bookDtoRequest.getAuthor(),
+                bookDtoRequest.getPublicationYear()
         );
     }
 

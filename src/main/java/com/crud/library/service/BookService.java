@@ -1,9 +1,9 @@
 package com.crud.library.service;
 
-import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.domain.Book;
 import com.crud.library.domain.Volume;
-import com.crud.library.domain.dto.BookDto;
+import com.crud.library.domain.dto.BookDtoRequest;
+import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.mapper.BookMapper;
 import com.crud.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,8 @@ public class BookService {
         this.bookMapper = bookMapper;
     }
 
-    public Long saveBook(final BookDto bookDto) {
-        Book book = bookMapper.mapToBook(bookDto);
+    public Long saveBook(final BookDtoRequest bookDtoRequest) {
+        Book book = bookMapper.mapToBook(bookDtoRequest);
         return bookRepository.save(book).getId();
     }
 
