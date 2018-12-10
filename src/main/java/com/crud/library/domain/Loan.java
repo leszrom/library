@@ -6,7 +6,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
@@ -15,8 +15,8 @@ public class Loan {
     private long id;
     private User user;
     private Volume volume;
-    private LocalDate pickUp;
-    private LocalDate dropOff;
+    private LocalDateTime pickUp;
+    private LocalDateTime dropOff;
 
     public Loan(User user, Volume volume) {
         this.user = user;
@@ -44,13 +44,13 @@ public class Loan {
 
     @CreatedDate
     @Column(name = "pick_up_date")
-    public LocalDate getPickUp() {
+    public LocalDateTime getPickUp() {
         return this.pickUp;
     }
 
     @LastModifiedDate
     @Column(name = "drop_off_date")
-    public LocalDate getDropOff() {
+    public LocalDateTime getDropOff() {
         return this.dropOff;
     }
 
@@ -66,11 +66,11 @@ public class Loan {
         this.volume = volume;
     }
 
-    public void setPickUp(LocalDate pickUp) {
+    public void setPickUp(LocalDateTime pickUp) {
         this.pickUp = pickUp;
     }
 
-    public void setDropOff(LocalDate dropOff) {
+    public void setDropOff(LocalDateTime dropOff) {
         this.dropOff = dropOff;
     }
 }

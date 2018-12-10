@@ -5,7 +5,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class User {
     private long id;
     private String firstname;
     private String lastname;
-    private LocalDate created;
+    private LocalDateTime created;
     private List<Loan> loans = new ArrayList<>();
 
     public User(String firstname, String lastname) {
@@ -43,7 +43,7 @@ public class User {
 
     @CreatedDate
     @Column(name = "created_date")
-    public LocalDate getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
@@ -73,7 +73,7 @@ public class User {
         this.loans = loans;
     }
 
-    public void setCreated(LocalDate created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 }

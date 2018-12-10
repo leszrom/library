@@ -28,6 +28,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('mysql:mysql-connector-java:8.0.13')
     compile('org.projectlombok:lombok:1.18.4')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7')
+
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

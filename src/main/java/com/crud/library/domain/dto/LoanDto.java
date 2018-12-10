@@ -1,10 +1,11 @@
 package com.crud.library.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
@@ -13,6 +14,8 @@ public class LoanDto {
     private long id;
     private long userId;
     private long volumeId;
-    private LocalDate pickUp;
-    private LocalDate dropOff;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    private LocalDateTime pickUp;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    private LocalDateTime dropOff;
 }
