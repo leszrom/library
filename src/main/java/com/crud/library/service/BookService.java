@@ -2,6 +2,7 @@ package com.crud.library.service;
 
 import com.crud.library.domain.Book;
 import com.crud.library.domain.Volume;
+import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.dto.BookDtoRequest;
 import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.mapper.BookMapper;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService {
@@ -28,8 +28,9 @@ public class BookService {
         return bookRepository.save(book).getId();
     }
 
-    public Optional<Book> getBookById(final Long id) {
-        return bookRepository.findById(id);
+    public BookDto getBookById(final Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
+        return bookMapper.mapToBookDto(book);
     }
 
     public List<Book> getAllBooks() {
