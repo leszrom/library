@@ -31,8 +31,13 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<BookDto>getBooks() {
+    public List<BookDto> getBooks() {
         return bookService.getAllBooks();
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
+    public void deleteBook(@PathVariable Long id) {
+        bookService.deleteBookById(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "{bookId}/volumes")
