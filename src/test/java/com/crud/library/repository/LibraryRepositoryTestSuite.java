@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LibraryRepositoryTestSuite {
@@ -44,9 +42,9 @@ public class LibraryRepositoryTestSuite {
         runway.getVolumes().add(runwayVolumeFirst);
         runway.getVolumes().add(runwayVolumeSecond);
 
-        Loan smithLoansFlowersFirst = new Loan(johnSmith, blueFlowersVolumeFirst, new Date());
-        Loan smithLoansRunway = new Loan(johnSmith, runwayVolumeFirst, new Date());
-        Loan bowLoansFlowersSecond = new Loan(aliceBow, blueFlowersVolumeSecond, new Date());
+        Loan smithLoansFlowersFirst = new Loan(johnSmith, blueFlowersVolumeFirst);
+        Loan smithLoansRunway = new Loan(johnSmith, runwayVolumeFirst);
+        Loan bowLoansFlowersSecond = new Loan(aliceBow, blueFlowersVolumeSecond);
 
         blueFlowersVolumeFirst.setRented(true);
         runwayVolumeFirst.setRented(true);

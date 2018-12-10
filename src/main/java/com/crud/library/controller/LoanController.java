@@ -1,6 +1,5 @@
 package com.crud.library.controller;
 
-import com.crud.library.domain.Loan;
 import com.crud.library.domain.dto.LoanDto;
 import com.crud.library.domain.dto.LoanDtoRequest;
 import com.crud.library.service.LoanService;

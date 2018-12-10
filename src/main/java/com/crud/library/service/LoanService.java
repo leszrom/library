@@ -15,8 +15,6 @@ import com.crud.library.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class LoanService {
     private final LoanRepository loanRepository;
@@ -33,20 +31,22 @@ public class LoanService {
     }
 
     public Long saveLoan(final LoanDtoRequest loanDtoRequest) {
+
         User user = userRepository.findById(loanDtoRequest.getUserId())
                 .orElseThrow(UserNotFoundException::new);
         Volume volume = volumeRepository.findById(loanDtoRequest.getVolumeId())
                 .orElseThrow(VolumeNotFoundException::new);
         volume.setRented(true);
-        Loan loan = new Loan(user, volume, new Date());
+
+        Loan loan = new Loan(user, volume);
         return loanRepository.save(loan).getId();
     }
 
     public LoanDto setDropOffDateAndVolumeStatus(final Long id) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(LoanNotFoundException::new);
-        loan.setDropOff(new Date());
         loan.getVolume().setRented(false);
+        //loan.setDropOff(new Date());
         return loanMapper.mapToLoanDto(loanRepository.save(loan));
     }
 }
