@@ -1,19 +1,21 @@
 package com.crud.library.service;
 
-import com.crud.library.exception.LoanNotFoundException;
-import com.crud.library.exception.UserNotFoundException;
-import com.crud.library.exception.VolumeNotFoundException;
 import com.crud.library.domain.Loan;
 import com.crud.library.domain.User;
 import com.crud.library.domain.Volume;
 import com.crud.library.domain.dto.LoanDto;
 import com.crud.library.domain.dto.LoanDtoRequest;
+import com.crud.library.exception.LoanNotFoundException;
+import com.crud.library.exception.UserNotFoundException;
+import com.crud.library.exception.VolumeNotFoundException;
 import com.crud.library.mapper.LoanMapper;
 import com.crud.library.repository.LoanRepository;
 import com.crud.library.repository.UserRepository;
 import com.crud.library.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class LoanService {
@@ -46,7 +48,7 @@ public class LoanService {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(LoanNotFoundException::new);
         loan.getVolume().setRented(false);
-        //loan.setDropOff(new Date());
+        loan.setDropOff(LocalDateTime.now());
         return loanMapper.mapToLoanDto(loanRepository.save(loan));
     }
 }

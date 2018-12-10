@@ -48,7 +48,6 @@ public class Loan {
         return this.pickUp;
     }
 
-    @LastModifiedDate
     @Column(name = "drop_off_date")
     public LocalDateTime getDropOff() {
         return this.dropOff;
