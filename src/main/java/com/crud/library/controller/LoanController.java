@@ -6,6 +6,8 @@ import com.crud.library.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -26,6 +28,11 @@ public class LoanController {
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
     public LoanDto getLoan(@PathVariable Long id) {
         return loanService.getLoanById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<LoanDto> getLoans() {
+        return loanService.getAllLoans();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "{id}")

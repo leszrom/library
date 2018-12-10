@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class LoanService {
@@ -47,6 +48,10 @@ public class LoanService {
     public LoanDto getLoanById(final Long id) {
         Loan loan = loanRepository.findById(id).orElseThrow(LoanNotFoundException::new);
         return loanMapper.mapToLoanDto(loanRepository.save(loan));
+    }
+
+    public List<LoanDto> getAllLoans() {
+        return loanMapper.mapToLoanDtoList(loanRepository.findAll());
     }
 
     public LoanDto setDropOffDateAndVolumeStatus(final Long id) {

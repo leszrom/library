@@ -11,6 +11,9 @@ import java.util.Optional;
 @Transactional
 @Repository
 public interface LoanRepository extends CrudRepository<Loan, Long> {
+    @Override
+    List<Loan> findAll();
+
     List<Loan> findAllByUserId(long id);
 
     Optional<Loan> findById(Long id);
