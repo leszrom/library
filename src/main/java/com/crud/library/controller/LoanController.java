@@ -23,8 +23,13 @@ public class LoanController {
         return loanService.saveLoan(loanDtoRequest);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "{loanId}")
-    public LoanDto finishLoan(@PathVariable Long loanId) {
-        return loanService.setDropOffDateAndVolumeStatus(loanId);
+    @RequestMapping(method = RequestMethod.GET, value = "{id}")
+    public LoanDto getLoan(@PathVariable Long id) {
+        return loanService.getLoanById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "{id}")
+    public LoanDto finishLoan(@PathVariable Long id) {
+        return loanService.setDropOffDateAndVolumeStatus(id);
     }
 }

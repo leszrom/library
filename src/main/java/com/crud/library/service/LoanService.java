@@ -44,6 +44,11 @@ public class LoanService {
         return loanRepository.save(loan).getId();
     }
 
+    public LoanDto getLoanById(final Long id) {
+        Loan loan = loanRepository.findById(id).orElseThrow(LoanNotFoundException::new);
+        return loanMapper.mapToLoanDto(loanRepository.save(loan));
+    }
+
     public LoanDto setDropOffDateAndVolumeStatus(final Long id) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(LoanNotFoundException::new);
