@@ -1,6 +1,6 @@
 package com.crud.library.service;
 
-import com.crud.library.controller.BookNotFoundException;
+import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.domain.Book;
 import com.crud.library.domain.Volume;
 import com.crud.library.domain.dto.BookDto;

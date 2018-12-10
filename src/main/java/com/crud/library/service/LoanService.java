@@ -1,8 +1,8 @@
 package com.crud.library.service;
 
-import com.crud.library.controller.LoanNotFoundException;
-import com.crud.library.controller.UserNotFoundException;
-import com.crud.library.controller.VolumeNotFoundException;
+import com.crud.library.exception.LoanNotFoundException;
+import com.crud.library.exception.UserNotFoundException;
+import com.crud.library.exception.VolumeNotFoundException;
 import com.crud.library.domain.Loan;
 import com.crud.library.domain.User;
 import com.crud.library.domain.Volume;

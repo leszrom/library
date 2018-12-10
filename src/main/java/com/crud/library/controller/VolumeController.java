@@ -2,6 +2,7 @@ package com.crud.library.controller;
 
 import com.crud.library.domain.Book;
 import com.crud.library.domain.Volume;
+import com.crud.library.exception.BookNotFoundException;
 import com.crud.library.service.BookService;
 import com.crud.library.service.VolumeService;
 import org.springframework.beans.factory.annotation.Autowired;

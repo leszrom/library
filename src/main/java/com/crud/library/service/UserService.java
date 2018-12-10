@@ -1,6 +1,6 @@
 package com.crud.library.service;
 
-import com.crud.library.controller.UserNotFoundException;
+import com.crud.library.exception.UserNotFoundException;
 import com.crud.library.domain.User;
 import com.crud.library.domain.dto.UserDto;
 import com.crud.library.domain.dto.UserDtoRequest;
