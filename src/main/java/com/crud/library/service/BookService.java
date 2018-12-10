@@ -33,8 +33,8 @@ public class BookService {
         return bookMapper.mapToBookDto(book);
     }
 
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public List<BookDto> getAllBooks() {
+        return bookMapper.mapToBookDtoList(bookRepository.findAll());
     }
 
     public void addVolume(final Long bookId) {

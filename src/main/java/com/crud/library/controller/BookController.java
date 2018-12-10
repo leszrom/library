@@ -6,6 +6,8 @@ import com.crud.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -26,6 +28,11 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
     public BookDto getBook(@PathVariable Long id) {
         return bookService.getBookById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<BookDto>getBooks() {
+        return bookService.getAllBooks();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "{bookId}/volumes")
