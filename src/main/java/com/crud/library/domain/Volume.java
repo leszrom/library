@@ -15,11 +15,7 @@ public class Volume {
 
     public Volume(Book book) {
         this.book = book;
-    }
-
-    @PrePersist
-    private void initializeRented() {
-        this.rented = false;
+        rented = false;
     }
 
     @Id
