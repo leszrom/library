@@ -6,9 +6,11 @@ import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.dto.BookDtoRequest;
 import com.crud.library.domain.dto.VolumeDto;
 import com.crud.library.exception.BookNotFoundException;
+import com.crud.library.exception.VolumeNotFoundException;
 import com.crud.library.mapper.BookMapper;
 import com.crud.library.mapper.VolumeMapper;
 import com.crud.library.repository.BookRepository;
+import com.crud.library.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +21,14 @@ import java.util.stream.Collectors;
 public class BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
+    private final VolumeRepository volumeRepository;
     private final VolumeMapper volumeMapper;
 
     @Autowired
-    public BookService(BookRepository bookRepository, BookMapper bookMapper, VolumeMapper volumeMapper) {
+    public BookService(BookRepository bookRepository, BookMapper bookMapper, VolumeRepository volumeRepository, VolumeMapper volumeMapper) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
+        this.volumeRepository = volumeRepository;
         this.volumeMapper = volumeMapper;
     }
 
@@ -72,5 +76,14 @@ public class BookService {
                 .filter(volume -> volume.isRented() == isRented)
                 .collect(Collectors.toList());
         return volumeMapper.mapToVolumeDtoList(volumeList);
+    }
+
+    public VolumeDto getVolumeById(final Long bookId, final Long volumeId) {
+        Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
+        Volume volume = book.getVolumes().stream()
+                .filter(v -> v.getId() == volumeId)
+                .findAny()
+                .orElseThrow(VolumeNotFoundException::new);
+        return volumeMapper.mapToVolumeDto(volume);
     }
 }
