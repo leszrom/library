@@ -51,7 +51,7 @@ public class BookService {
 
     public void addVolume(final Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
-        book.getVolumes().add(new Volume(book, false));
+        book.getVolumes().add(new Volume(book));
         bookRepository.save(book);
     }
 }

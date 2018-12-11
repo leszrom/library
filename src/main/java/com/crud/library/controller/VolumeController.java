@@ -27,6 +27,6 @@ public class VolumeController {
     public Long createVolume(@PathVariable Long bookId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(BookNotFoundException::new);
-        return volumeService.saveVolume(new Volume(book, false)).getId();
+        return volumeService.saveVolume(new Volume(book)).getId();
     }
 }

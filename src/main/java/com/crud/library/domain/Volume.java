@@ -13,9 +13,13 @@ public class Volume {
     private Book book;
     private boolean rented;
 
-    public Volume(Book book, boolean rented) {
+    public Volume(Book book) {
         this.book = book;
-        this.rented = rented;
+    }
+
+    @PrePersist
+    private void initializeRented() {
+        this.rented = false;
     }
 
     @Id
@@ -23,6 +27,7 @@ public class Volume {
     public long getId() {
         return this.id;
     }
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "book_id")
     public Book getBook() {

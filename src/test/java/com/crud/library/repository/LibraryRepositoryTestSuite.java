@@ -32,10 +32,10 @@ public class LibraryRepositoryTestSuite {
         Book blueFlowers = new Book("Blue Flower", "Michael Gill", 2014);
         Book runway = new Book("Runway", "Ben Slow", 1995);
 
-        Volume blueFlowersVolumeFirst = new Volume(blueFlowers, false);
-        Volume blueFlowersVolumeSecond = new Volume(blueFlowers, false);
-        Volume runwayVolumeFirst = new Volume(runway, false);
-        Volume runwayVolumeSecond = new Volume(runway, false);
+        Volume blueFlowersVolumeFirst = new Volume(blueFlowers);
+        Volume blueFlowersVolumeSecond = new Volume(blueFlowers);
+        Volume runwayVolumeFirst = new Volume(runway);
+        Volume runwayVolumeSecond = new Volume(runway);
 
         blueFlowers.getVolumes().add(blueFlowersVolumeFirst);
         blueFlowers.getVolumes().add(blueFlowersVolumeSecond);
