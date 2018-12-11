@@ -13,7 +13,5 @@ import java.util.Optional;
 public interface VolumeRepository extends CrudRepository<Volume, Long> {
     List<Volume> findAllByBookId(Long id);
 
-    List<Volume> findAllByBookIdAndRentedIsFalse(Long id);
-
     Optional<Volume> findById(Long id);
 }
