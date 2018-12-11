@@ -29,7 +29,7 @@ public class Volume {
         return this.book;
     }
 
-    @Column(name = "status")
+    @Column(name = "is_rented")
     public boolean isRented() {
         return this.rented;
     }
