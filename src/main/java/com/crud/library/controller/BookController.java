@@ -2,6 +2,7 @@ package com.crud.library.controller;
 
 import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.dto.BookDtoRequest;
+import com.crud.library.domain.dto.VolumeDto;
 import com.crud.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,5 +49,10 @@ public class BookController {
     @RequestMapping(method = RequestMethod.PUT, value = "{bookId}/volumes")
     public void addBookVolume(@PathVariable Long bookId) {
         bookService.addVolume(bookId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "{bookId}/volumes")
+    public List<VolumeDto> getVolumes(@PathVariable Long bookId) {
+        return bookService.getAllVolumesByBookId(bookId);
     }
 }
