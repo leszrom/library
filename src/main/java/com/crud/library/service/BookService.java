@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -62,6 +63,14 @@ public class BookService {
     public List<VolumeDto> getAllVolumesByBookId(final Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         List<Volume> volumeList = book.getVolumes();
+        return volumeMapper.mapToVolumeDtoList(volumeList);
+    }
+
+    public List<VolumeDto> getAllVolumesByBookIdAndAvailability(final Long bookId, final Boolean isRented) {
+        Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
+        List<Volume> volumeList = book.getVolumes().stream()
+                .filter(volume -> volume.isRented() == isRented)
+                .collect(Collectors.toList());
         return volumeMapper.mapToVolumeDtoList(volumeList);
     }
 }

@@ -55,4 +55,9 @@ public class BookController {
     public List<VolumeDto> getVolumes(@PathVariable Long bookId) {
         return bookService.getAllVolumesByBookId(bookId);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "{bookId}/volumes/is")
+    public List<VolumeDto> getVolumesByAvailability(@PathVariable Long bookId, @RequestParam Boolean rented) {
+        return bookService.getAllVolumesByBookIdAndAvailability(bookId, rented);
+    }
 }

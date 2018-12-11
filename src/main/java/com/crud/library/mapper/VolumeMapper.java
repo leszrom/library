@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Component
 public class VolumeMapper {
 
-    private VolumeDto mapToVolumeDto(Volume volume) {
+    public VolumeDto mapToVolumeDto(Volume volume) {
         return new VolumeDto(
                 volume.getId(),
                 volume.getBook().getId(),
