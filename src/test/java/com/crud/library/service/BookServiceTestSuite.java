@@ -29,7 +29,7 @@ public class BookServiceTestSuite {
         BookDtoRequest bookDtoRequest = new BookDtoRequest("title", "author", 1995);
 
         //When
-        Long bookId = bookService.saveBook(bookDtoRequest);
+        long bookId = bookService.saveBook(bookDtoRequest);
         Book readBook = bookRepository.findOne(bookId);
 
         //Then
@@ -45,7 +45,7 @@ public class BookServiceTestSuite {
     public void should_return_book_from_database_by_given_id() {
         //Given
         Book book = new Book("title", "author", 1995);
-        Long bookId = bookRepository.save(book).getId();
+        long bookId = bookRepository.save(book).getId();
 
         //When
         BookDto readBook = bookService.getBookById(bookId);
@@ -65,7 +65,7 @@ public class BookServiceTestSuite {
         Book book = new Book("title", "author", 1995);
         int booksQuantity = bookRepository.findAll().size();
 
-        Long bookId = bookRepository.save(book).getId();
+        long bookId = bookRepository.save(book).getId();
 
         //When
         List<BookDto> books = bookService.getAllBooks();
