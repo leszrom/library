@@ -104,11 +104,19 @@ public class BookServiceTestSuite {
     @Test
     public void should_return_DeleteBookById() {
         //Given
+        Book book = new Book("title", "author", 1995);
+        long bookId = bookRepository.save(book).getId();
 
         //When
+        bookService.deleteBookById(bookId);
+
+        List<BookDto> books = bookService.getAllBooks();
+        boolean isListContainingDeletedBook = books.stream()
+                .map(BookDto::getId)
+                .anyMatch(id -> id.equals(bookId));
 
         //Then
-
+        Assert.assertFalse(isListContainingDeletedBook);
     }
 
     @Test
