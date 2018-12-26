@@ -120,13 +120,21 @@ public class BookServiceTestSuite {
     }
 
     @Test
-    public void should_return_AddVolume() {
+    public void should_create_new_volume_of_book() {
         //Given
+        Book book = new Book("title", "author", 1995);
+        long bookId = bookRepository.save(book).getId();
 
         //When
+        bookService.addVolume(bookId);
+        bookService.addVolume(bookId);
+        int volumesQuantity = bookRepository.findOne(bookId).getVolumes().size();
 
         //Then
+        Assert.assertEquals(2, volumesQuantity);
 
+        //ClenaUp
+        bookRepository.deleteById(bookId);
     }
 
     @Test
