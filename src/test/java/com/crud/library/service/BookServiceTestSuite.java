@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class BookServiceTestSuite {
@@ -58,13 +60,25 @@ public class BookServiceTestSuite {
     }
 
     @Test
-    public void should_return_GetAllBooks() {
+    public void should_return_all_books_in_database() {
         //Given
+        Book book = new Book("title", "author", 1995);
+        int booksQuantity = bookRepository.findAll().size();
+
+        Long bookId = bookRepository.save(book).getId();
 
         //When
+        List<BookDto> books = bookService.getAllBooks();
+        boolean isListContainingSavedBook = books.stream()
+                .map(BookDto::getId)
+                .anyMatch(id -> id.equals(bookId));
 
         //Then
+        Assert.assertEquals(booksQuantity + 1, books.size());
+        Assert.assertTrue(isListContainingSavedBook);
 
+        //CleanUp
+        bookRepository.deleteById(bookId);
     }
 
     @Test
