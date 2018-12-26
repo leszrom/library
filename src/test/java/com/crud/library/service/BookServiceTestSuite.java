@@ -82,13 +82,23 @@ public class BookServiceTestSuite {
     }
 
     @Test
-    public void should_return_UpdateBook() {
+    public void should_return_updated_book() {
         //Given
+        Book book = new Book("title", "author", 1995);
+        long bookId = bookRepository.save(book).getId();
+        BookDtoRequest bookDtoRequest = new BookDtoRequest("new_title", "new_author", 2000);
 
         //When
+        BookDto updatedBook = bookService.updateBook(bookId, bookDtoRequest);
 
         //Then
+        Assert.assertEquals(bookId, updatedBook.getId());
+        Assert.assertEquals("new_title", updatedBook.getTitle());
+        Assert.assertEquals("new_author", updatedBook.getAuthor());
+        Assert.assertEquals(2000, updatedBook.getPublicationYear());
 
+        //CleanUp
+        bookRepository.deleteById(bookId);
     }
 
     @Test
