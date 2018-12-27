@@ -1,6 +1,7 @@
 package com.crud.library.service;
 
 import com.crud.library.domain.Book;
+import com.crud.library.domain.Volume;
 import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.dto.BookDtoRequest;
 import com.crud.library.repository.BookRepository;
@@ -141,13 +142,20 @@ public class BookServiceTestSuite {
     }
 
     @Test
-    public void should_return_GetAllVolumesByBookId() {
+    public void should_return_list_of_volumes_by_book_id() {
         //Given
+        Book book = new Book("title", "author", 1995);
+        book.getVolumes().add(new Volume(book));
+        long bookId = bookRepository.save(book).getId();
 
         //When
+        int volumesQuantity = bookService.getAllVolumesByBookId(bookId).size();
 
         //Then
+        Assert.assertEquals(1, volumesQuantity);
 
+        //CleanUp
+        bookRepository.deleteById(bookId);
     }
 
     @Test

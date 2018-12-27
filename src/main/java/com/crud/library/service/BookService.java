@@ -63,6 +63,7 @@ public class BookService {
         bookRepository.save(book);
     }
 
+    @Transactional
     public List<VolumeDto> getAllVolumesByBookId(final Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         List<Volume> volumeList = book.getVolumes();
