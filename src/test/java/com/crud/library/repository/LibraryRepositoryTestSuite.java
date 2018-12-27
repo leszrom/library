@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDate;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LibraryRepositoryTestSuite {
@@ -31,13 +29,13 @@ public class LibraryRepositoryTestSuite {
         User johnSmith = new User("John", "Smith");
         User aliceBow = new User("Alice", "Bow");
 
-        Book blueFlowers = new Book("Blue Flower", "Michael Gill", LocalDate.parse("2014-09-12"));
-        Book runway = new Book("Runway", "Ben Slow", LocalDate.parse("1998-01-30"));
+        Book blueFlowers = new Book("Blue Flower", "Michael Gill", 2014);
+        Book runway = new Book("Runway", "Ben Slow", 1995);
 
-        Volume blueFlowersVolumeFirst = new Volume(blueFlowers, false);
-        Volume blueFlowersVolumeSecond = new Volume(blueFlowers, false);
-        Volume runwayVolumeFirst = new Volume(runway, false);
-        Volume runwayVolumeSecond = new Volume(runway, false);
+        Volume blueFlowersVolumeFirst = new Volume(blueFlowers);
+        Volume blueFlowersVolumeSecond = new Volume(blueFlowers);
+        Volume runwayVolumeFirst = new Volume(runway);
+        Volume runwayVolumeSecond = new Volume(runway);
 
         blueFlowers.getVolumes().add(blueFlowersVolumeFirst);
         blueFlowers.getVolumes().add(blueFlowersVolumeSecond);
@@ -84,7 +82,10 @@ public class LibraryRepositoryTestSuite {
         Assert.assertEquals(blueFlowersVolumes, blueFlowersVolumesRead);
         Assert.assertEquals(runwayVolumes, runwayVolumesRead);
 
-        userRepository.deleteAll();
-        bookRepository.deleteAll();
+        //CleanUp
+        userRepository.delete(johnSmith);
+        userRepository.delete(aliceBow);
+        bookRepository.delete(blueFlowers);
+        bookRepository.delete(runway);
     }
 }

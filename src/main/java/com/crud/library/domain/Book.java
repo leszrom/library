@@ -1,27 +1,31 @@
 package com.crud.library.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "books")
 public class Book {
     private long id;
     private String title;
     private String author;
-    private LocalDate published;
+    private int publicationYear;
     private List<Volume> volumes = new ArrayList<>();
 
-    public Book(String title, String author, LocalDate published) {
+    public Book(String title, String author, int publicationYear) {
         this.title = title;
         this.author = author;
-        this.published = published;
+        this.publicationYear = publicationYear;
+    }
+
+    public Book(long id, String title, String author, int publicationYear) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
     }
 
     @Id
@@ -40,9 +44,9 @@ public class Book {
         return this.author;
     }
 
-    @Column(name = "publication_date")
-    public LocalDate getPublished() {
-        return this.published;
+    @Column(name = "publication_year")
+    public int getPublicationYear() {
+        return this.publicationYear;
     }
 
     @OneToMany(
@@ -67,8 +71,8 @@ public class Book {
         this.author = author;
     }
 
-    public void setPublished(LocalDate published) {
-        this.published = published;
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
     }
 
     public void setVolumes(List<Volume> volumes) {

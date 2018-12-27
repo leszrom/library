@@ -1,26 +1,25 @@
 package com.crud.library.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "loans")
 public class Loan {
     private long id;
     private User user;
     private Volume volume;
-    private Date pickUp;
-    private Date dropOff;
+    private LocalDateTime pickUp;
+    private LocalDateTime dropOff;
 
     public Loan(User user, Volume volume) {
         this.user = user;
         this.volume = volume;
-        this.pickUp = new Date();
     }
 
     @Id
@@ -29,25 +28,26 @@ public class Loan {
         return this.id;
     }
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     public User getUser() {
         return this.user;
     }
 
-    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "volume_id")
     public Volume getVolume() {
         return this.volume;
     }
 
+    @CreatedDate
     @Column(name = "pick_up_date")
-    public Date getPickUp() {
+    public LocalDateTime getPickUp() {
         return this.pickUp;
     }
 
     @Column(name = "drop_off_date")
-    public Date getDropOff() {
+    public LocalDateTime getDropOff() {
         return this.dropOff;
     }
 
@@ -63,11 +63,11 @@ public class Loan {
         this.volume = volume;
     }
 
-    public void setPickUp(Date pickUp) {
+    public void setPickUp(LocalDateTime pickUp) {
         this.pickUp = pickUp;
     }
 
-    public void setDropOff(Date dropOff) {
+    public void setDropOff(LocalDateTime dropOff) {
         this.dropOff = dropOff;
     }
 }

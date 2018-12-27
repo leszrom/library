@@ -1,28 +1,28 @@
 package com.crud.library.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
     private long id;
     private String firstname;
     private String lastname;
-    private Date created;
+    private LocalDateTime created;
     private List<Loan> loans = new ArrayList<>();
 
     public User(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.created = new Date();
     }
 
     @Id
@@ -41,8 +41,9 @@ public class User {
         return lastname;
     }
 
-    @Column(name = "creation_date")
-    public Date getCreated() {
+    @CreatedDate
+    @Column(name = "created_date")
+    public LocalDateTime getCreated() {
         return created;
     }
 
@@ -72,7 +73,7 @@ public class User {
         this.loans = loans;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 }
