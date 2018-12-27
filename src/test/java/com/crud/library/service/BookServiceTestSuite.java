@@ -159,13 +159,29 @@ public class BookServiceTestSuite {
     }
 
     @Test
-    public void should_return_GetAllVolumesByBookIdAndAvailability() {
+    public void should_return_lists_of_book_volumes_by_availability() {
         //Given
+        Book book = new Book("title", "author", 1995);
+
+        Volume availableVolume = new Volume(book);
+        Volume rentedVolume = new Volume(book);
+        rentedVolume.setRented(true);
+
+        book.getVolumes().add(rentedVolume);
+        book.getVolumes().add(availableVolume);
+
+        long bookId = bookRepository.save(book).getId();
 
         //When
+        int rentedVolumes = bookService.getAllVolumesByBookIdAndAvailability(bookId, true).size();
+        int availableVolumes = bookService.getAllVolumesByBookIdAndAvailability(bookId, false).size();
 
         //Then
+        Assert.assertEquals(1, rentedVolumes);
+        Assert.assertEquals(1, availableVolumes);
 
+        //CleanUp
+        bookRepository.deleteById(bookId);
     }
 
     @Test

@@ -69,7 +69,7 @@ public class BookService {
         List<Volume> volumeList = book.getVolumes();
         return volumeMapper.mapToVolumeDtoList(volumeList);
     }
-
+    @Transactional
     public List<VolumeDto> getAllVolumesByBookIdAndAvailability(final Long bookId, final Boolean isRented) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         List<Volume> volumeList = book.getVolumes().stream()
