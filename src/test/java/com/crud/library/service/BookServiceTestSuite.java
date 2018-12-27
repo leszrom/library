@@ -4,6 +4,7 @@ import com.crud.library.domain.Book;
 import com.crud.library.domain.Volume;
 import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.dto.BookDtoRequest;
+import com.crud.library.domain.dto.VolumeDto;
 import com.crud.library.repository.BookRepository;
 import com.crud.library.repository.VolumeRepository;
 import org.junit.Assert;
@@ -185,14 +186,22 @@ public class BookServiceTestSuite {
     }
 
     @Test
-    public void should_return_GetVolumeById() {
+    public void should_return_volume_by_id_and_book_id() {
         //Given
+        Book book = new Book("title", "author", 1995);
+        Volume volume = new Volume(book);
+
+        long bookId = bookRepository.save(book).getId();
+        long volumeId = volumeRepository.save(volume).getId();
 
         //When
+        VolumeDto readVolume = bookService.getVolumeById(bookId, volumeId);
 
         //Then
+        Assert.assertEquals(volumeId, readVolume.getId());
+        Assert.assertEquals(bookId, readVolume.getBookId());
 
+        //CleanUp
+        bookRepository.deleteById(bookId);
     }
-
-
 }

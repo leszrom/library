@@ -69,6 +69,7 @@ public class BookService {
         List<Volume> volumeList = book.getVolumes();
         return volumeMapper.mapToVolumeDtoList(volumeList);
     }
+
     @Transactional
     public List<VolumeDto> getAllVolumesByBookIdAndAvailability(final Long bookId, final Boolean isRented) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
@@ -78,6 +79,7 @@ public class BookService {
         return volumeMapper.mapToVolumeDtoList(volumeList);
     }
 
+    @Transactional
     public VolumeDto getVolumeById(final Long bookId, final Long volumeId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         Volume volume = book.getVolumes().stream()
