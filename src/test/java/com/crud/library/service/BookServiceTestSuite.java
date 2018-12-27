@@ -4,6 +4,7 @@ import com.crud.library.domain.Book;
 import com.crud.library.domain.dto.BookDto;
 import com.crud.library.domain.dto.BookDtoRequest;
 import com.crud.library.repository.BookRepository;
+import com.crud.library.repository.VolumeRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,9 @@ public class BookServiceTestSuite {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private VolumeRepository volumeRepository;
 
     @Test
     public void should_save_given_book_to_database() {
@@ -127,11 +131,10 @@ public class BookServiceTestSuite {
 
         //When
         bookService.addVolume(bookId);
-        bookService.addVolume(bookId);
-        int volumesQuantity = bookRepository.findOne(bookId).getVolumes().size();
+        int volumesQuantity = volumeRepository.findAllByBookId(bookId).size();
 
         //Then
-        Assert.assertEquals(2, volumesQuantity);
+        Assert.assertEquals(1, volumesQuantity);
 
         //ClenaUp
         bookRepository.deleteById(bookId);

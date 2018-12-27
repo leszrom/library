@@ -12,6 +12,7 @@ import com.crud.library.mapper.VolumeMapper;
 import com.crud.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +56,7 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    @Transactional
     public void addVolume(final Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         book.getVolumes().add(new Volume(book));
