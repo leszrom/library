@@ -12,6 +12,7 @@ import com.crud.library.mapper.VolumeMapper;
 import com.crud.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,18 +56,21 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    @Transactional
     public void addVolume(final Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         book.getVolumes().add(new Volume(book));
         bookRepository.save(book);
     }
 
+    @Transactional
     public List<VolumeDto> getAllVolumesByBookId(final Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         List<Volume> volumeList = book.getVolumes();
         return volumeMapper.mapToVolumeDtoList(volumeList);
     }
 
+    @Transactional
     public List<VolumeDto> getAllVolumesByBookIdAndAvailability(final Long bookId, final Boolean isRented) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         List<Volume> volumeList = book.getVolumes().stream()
@@ -75,6 +79,7 @@ public class BookService {
         return volumeMapper.mapToVolumeDtoList(volumeList);
     }
 
+    @Transactional
     public VolumeDto getVolumeById(final Long bookId, final Long volumeId) {
         Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         Volume volume = book.getVolumes().stream()
